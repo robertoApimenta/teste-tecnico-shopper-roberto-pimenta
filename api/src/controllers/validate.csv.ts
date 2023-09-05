@@ -21,33 +21,51 @@ export const validateCsv = async (req: Request, res: Response) => {
   // Use uma assertiva de tipo para informar ao TypeScript o tipo esperado
   const products = result as Product[];
 
-  console.log(products);
-
-  const dataCsvValidate: { product_code: number; new_price: number; messages: string[] }[] = [];
+  const dataCsvValidate: {
+    product_code: number;
+    new_price: number;
+    name: string; // Adicione os campos do produto
+    cost_price: number;
+    sales_price: number;
+    messages: string[];
+  }[] = [];
 
   dataCsv.forEach((el) => {
     const messages: string[] = [];
+    let product: Product | undefined;
 
     if (el.product_code === null || el.product_code === undefined) {
       messages.push('\'product_code\' é obrigatório');
     } else if (!Number.isInteger(el.product_code)) {
       messages.push('\'product_code\' precisa ser do tipo inteiro');
     } else {
-      // Utilize o método some para verificar se o product_code existe na lista de produtos
-      const productCodeExists = products.some((product) => product.code === el.product_code);
-      if (!productCodeExists) {
+      product = products.find((p) => p.code === el.product_code);
+      if (!product) {
         messages.push('\'product_code\' não existe na lista de produtos');
       }
     }
+    const upperLimit = Number(product?.sales_price) + (0.10 * Number(product?.sales_price)); // Limite superior
+    const lowerLimit = Number(product?.sales_price) - (0.10 * Number(product?.sales_price)); // Limite inferior
 
     if (el.new_price === null || el.new_price === undefined) {
       messages.push('\'new_price\' é obrigatório');
     } else if (typeof el.new_price !== 'number' || Number.isNaN(el.new_price)) {
       messages.push('\'new_price\' precisa ser do tipo número');
+    } else if (el.new_price > upperLimit) {
+      messages.push(`O novo preço não pode ser maior que 10% do preço atual. Valor máximo: R$ ${upperLimit.toFixed(2)}`);
+    } if (el.new_price < lowerLimit) {
+      messages.push(`O novo preço não pode ser menor que 10% do preço atual. Valor mínimo: R$ ${lowerLimit.toFixed(2)}`);
     }
 
     // Crie um novo objeto com mensagens de validação
-    const validatedObject = { ...el, messages };
+    // Crie um novo objeto com todas as informações
+    const validatedObject = {
+      ...el,
+      name: String(product?.name || ''), // Converta para string
+      cost_price: Number(product?.cost_price || ''), // Converta para string
+      sales_price: Number(product?.sales_price || ''), // Converta para string
+      messages,
+    };
 
     // Adicione o objeto validado ao array de validação
     dataCsvValidate.push(validatedObject);
