@@ -1,5 +1,3 @@
-import { Request, Response } from 'express';
-
 import productModel from '../models/product.model';
 
 interface CsvData {
@@ -14,8 +12,7 @@ interface Product {
   sales_price: string;
 }
 
-export const validateCsv = async (req: Request, res: Response) => {
-  const dataCsv: CsvData[] = req.body;
+export const validateCsv = async (dataCsv: CsvData[]) => {
   const result = await productModel.findAll();
 
   const products = result as Product[];
@@ -67,5 +64,5 @@ export const validateCsv = async (req: Request, res: Response) => {
     dataCsvValidate.push(validatedObject);
   });
 
-  return res.status(200).json(dataCsvValidate);
+  return dataCsvValidate;
 };
