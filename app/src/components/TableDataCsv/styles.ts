@@ -35,7 +35,7 @@ export const StyledTable = styled.table`
   width: 80%;
   max-width: 800px;
   margin-top: 20px;
-  border: 1px solid #ccc; /* Adiciona uma borda à tabela */
+  border: 1px solid #ccc;
 `;
 
 export const StyledHeader = styled.h2`
@@ -44,17 +44,17 @@ export const StyledHeader = styled.h2`
 `;
 
 export const StyledTableCell = styled.td`
-  border: 1px solid #ccc; /* Adiciona uma borda à célula */
-  padding: 8px; /* Espaçamento interno das células */
+  border: 1px solid #ccc;
+  padding: 8px;
 `;
 
 export const StyledTableHeader = styled.th`
-  border: 1px solid #ccc; /* Adiciona uma borda à célula de cabeçalho */
-  padding: 8px; /* Espaçamento interno das células de cabeçalho */
+  border: 1px solid #ccc;
+  padding: 8px;
 `;
 
 export const StyledMessages = styled.ul`
-  list-style: none; /* Remover marcadores */
+  list-style: none;
   padding: 0;
 `;
 

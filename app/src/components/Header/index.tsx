@@ -46,14 +46,12 @@ function Index() {
           setTableData([]);
         }
       } catch (error) {
-        console.error('Erro ao fazer a solicitação:', error);
         setTableData([]);
       }
     } else {
       setTableData([]);
     }
   };
-
 
   return (
     <>
