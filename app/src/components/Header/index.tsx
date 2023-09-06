@@ -41,6 +41,7 @@ function Index() {
 
         if (response.data) {
           setTableData(response.data);
+          setSelectedFile(null);
         } else {
           setTableData([]);
         }
@@ -82,7 +83,6 @@ function Index() {
           </div>
         )}
 
-
       </ Container>
       {tableData.length > 0 && (
         <TableDataCsv tableData={tableData}/>
@@ -93,5 +93,3 @@ function Index() {
 }
 
 export default Index;
-
-

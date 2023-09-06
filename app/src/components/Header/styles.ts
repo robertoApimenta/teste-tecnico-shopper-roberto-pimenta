@@ -12,6 +12,7 @@ export const Container = styled.div`
   button {
     display: flex;
     margin: 20px auto;
+    margin-bottom: 42px;
     padding: 20px;
     border: none;
     border: 3px solid #263238;

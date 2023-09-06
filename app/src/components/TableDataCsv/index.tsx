@@ -58,7 +58,7 @@ const index: React.FC<TableDataCsvProps> = ({ tableData }) => {
     // Verifique se o botão já foi clicado antes de enviar a solicitação novamente.
     if (!isButtonClicked) {
       axios
-        .patch('http://localhost:3000/update-products', { tableData })
+        .patch('http://localhost:3000/update-products', tableData)
         .then((response) => {
           if (response.status === 200) {
             setIsSuccessModalOpen(true); // Abra o modal em caso de sucesso
@@ -79,6 +79,8 @@ const index: React.FC<TableDataCsvProps> = ({ tableData }) => {
   return (
     <Container>
       <StyledHeader>Tabela de Dados Validados</StyledHeader>
+      <small>Você só poderá atualizar os valores dos produtos caso a </small>
+      <small> coluna <strong>Validações</strong> esteja vazia</small>
       <StyledTable>
         <thead>
           <tr>
