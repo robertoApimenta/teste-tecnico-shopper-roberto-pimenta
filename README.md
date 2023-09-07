@@ -12,25 +12,43 @@ Clone o projeto no seu computador, ele terá a seguinte estrutura:
 
 ![1693979739478](image/README/1693979739478.png)
 
-Se quiser utilizar o Docker para subir o serviço do MySQL, ainda na raiz do projeto rode o comando
+# Dependências
 
-`docker-compose up -d`
+- Node
+- Docker
+
+## Buildando e rodando no Docker
+
+Em um terminal:
+
+1. docker compose up -d --build
+
+   Irá subir os serviços de back-end na porta 3000 e banco de dados MySQL na porta 3306.
+
+Agora execute:
+
+1. docker build -t vite-app .
+2. docker run -p 80:80 vite-app
+
+Subirá o front-end em localhost:80
 
 OBS: O MySQL vai subir na porta 3306 do seu computador, certifique-se de que ela não está em uso.
 
-A aplicação já está configurada para se conectar com o banco de dados que subir com esse compose.
+A aplicação já está configurada para se conectar com o banco de dados que subir com o Docker.
 
 ---
 
+## Instalação e execução localmente
+
 ## Subindo o back-end:
 
-Abra um terminal e acesse o diretório api, dentro dele instale as dependências `npm install`, após a conclusão rode o comando para executar o servidor back-end `npm run dev`. Ele deve responder com um console.log confirmando a execução do servidor na porta 3000.
+Abra um terminal e acesse o diretório api, dentro dele instale as dependências `npm install`, após a conclusão rode o comando para executar o servidor back-end `npm start`. Ele deve responder com um console.log confirmando a execução do servidor na porta 3000.
 
 ---
 
 ## Subindo o front-end:
 
-Abra um segundo terminal e acesse o diretório app, dentro dele instale as dependências `npm install`, após a conclusão rode o comando para executar o servidor front-end `npm run dev`. Uma aba do seu navegador deve abrir com o servidor executando na porta 3001.
+Abra um segundo terminal e acesse o diretório app, dentro dele instale as dependências `npm install`, após a conclusão rode o comando para executar o servidor front-end `npm start`. Uma aba do seu navegador deve abrir com o servidor executando na porta 3001.
 
 ---
 
